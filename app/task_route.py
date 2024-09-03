@@ -32,9 +32,10 @@ async def delete_task(task_id: int, request: Request, db: Session = Depends(get_
     crud.delete_task(db, task_id)
 
     response_html = f"""
-    <div hx-swap-oob="outerHTML" id="task-{task_id}"></div>
+    <div id="task-{task_id}" hx-swap-oob="delete"></div>
     <div id="task-detail" hx-swap-oob="innerHTML"></div>
     """
+
     return HTMLResponse(content=response_html)
 
 
