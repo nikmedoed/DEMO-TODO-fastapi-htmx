@@ -41,6 +41,8 @@ async def delete_task(task_id: int, request: Request, db: Session = Depends(get_
 
 @router.post("/update/{task_id}", response_class=HTMLResponse)
 async def update_task(task_id: int, request: Request, completed: bool = Form(False), db: Session = Depends(get_db)):
+    # Обновление статуса задачи в базе данных
     crud.update_task_status(db, task_id, completed)
-    task = crud.get_task(db, task_id)
-    return templates.TemplateResponse("task_detail.html", {"request": request, "task": task})
+
+    # Ничего не возвращаем, так как обновления HTML не требуется
+    return HTMLResponse(status_code=204)  # 204 No Content

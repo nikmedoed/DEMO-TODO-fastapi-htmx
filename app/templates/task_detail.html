@@ -5,10 +5,8 @@
       hx-swap="outerHTML">
     <button type="submit" class="bg-red-500 text-white py-2 px-4">Delete Task</button>
 </form>
-
-
 <form hx-post="/task/update/{{ task.id }}"
-      hx-swap="outerHTML" class="mt-4">
+      class="mt-4">
     <label class="flex items-center">
         <input type="checkbox" name="completed"
                hx-post="/task/update/{{ task.id }}"
