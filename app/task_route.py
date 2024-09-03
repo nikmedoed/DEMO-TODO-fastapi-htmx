@@ -28,7 +28,7 @@ async def add_task(request: Request, title: str = Form(...), description: str = 
 
 
 @router.post("/delete/{task_id}", response_class=HTMLResponse)
-async def delete_task(task_id: int, request: Request, db: Session = Depends(get_db)):
+async def delete_task(task_id: int, db: Session = Depends(get_db)):
     crud.delete_task(db, task_id)
 
     response_html = f"""
@@ -40,9 +40,7 @@ async def delete_task(task_id: int, request: Request, db: Session = Depends(get_
 
 
 @router.post("/update/{task_id}", response_class=HTMLResponse)
-async def update_task(task_id: int, request: Request, completed: bool = Form(False), db: Session = Depends(get_db)):
-    # Обновление статуса задачи в базе данных
+async def update_task(task_id: int, completed: bool = Form(False), db: Session = Depends(get_db)):
     crud.update_task_status(db, task_id, completed)
 
-    # Ничего не возвращаем, так как обновления HTML не требуется
-    return HTMLResponse(status_code=204)  # 204 No Content
+    return HTMLResponse(status_code=204)
