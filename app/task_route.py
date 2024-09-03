@@ -15,18 +15,15 @@ async def read_task(task_id: int, request: Request, db: Session = Depends(get_db
     return templates.TemplateResponse("task_detail.html", {"request": request, "task": task})
 
 
-
 @router.post("/add", response_class=HTMLResponse)
 async def add_task(request: Request, title: str = Form(...), description: str = Form(...),
                    db: Session = Depends(get_db)):
-    # Create new task
     new_task = crud.create_task(db, title=title, description=description)
+    task_html = (templates.TemplateResponse(
+        "task_item.html",
+        {"request": request, "task": new_task})
+                 .body.decode("utf-8"))
 
-    # Render the new task's HTML
-    task_html = templates.TemplateResponse("task_item.html", {"request": request, "task": new_task}).body.decode(
-        "utf-8")
-
-    # Clear the form after submission by sending a blank response for the form
     return HTMLResponse(content=task_html)
 
 

@@ -1,4 +1,7 @@
-<div id="task-{{ task.id }}" hx-get="/task/{{ task.id }}" hx-target="#task-detail" hx-swap="innerHTML"
+<div id="task-{{ task.id }}"
+     hx-get="/task/{{ task.id }}"
+     hx-target="#task-detail"
+     hx-swap="innerHTML"
      class="p-2 border mb-2 cursor-pointer hover:bg-gray-100">
     <p>{{ task.id }} - {{ task.title }}</p>
 </div>
