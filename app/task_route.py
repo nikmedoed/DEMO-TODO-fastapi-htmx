@@ -50,7 +50,23 @@ async def delete_task(task_id: int, db: Session = Depends(get_db)):
 
 
 @router.post("/update/{task_id}", response_class=HTMLResponse)
-async def update_task(task_id: int, completed: bool = Form(False), db: Session = Depends(get_db)):
+async def update_task(task_id: int, request: Request, completed: bool = Form(False), db: Session = Depends(get_db)):
     crud.update_task_status(db, task_id, completed)
+    task = crud.get_task(db, task_id)
 
-    return HTMLResponse(status_code=204)
+    checkbox_html = (templates.TemplateResponse(
+        "task_checkbox.html",
+        {"request": request, "task": task})
+                     .body.decode("utf-8"))
+
+    task_html = (templates.TemplateResponse(
+        "task_item.html",
+        {"request": request, "task": task})
+                 .body.decode("utf-8"))
+
+    response_html = f"""
+    <div id="task-{task_id}" hx-swap-oob="outerHTML">{task_html}</div>
+    <div hx-swap-oob="outerHTML">{checkbox_html}</div>
+    """
+
+    return HTMLResponse(content=response_html)

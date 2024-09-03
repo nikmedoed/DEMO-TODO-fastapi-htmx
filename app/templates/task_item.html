@@ -2,6 +2,7 @@
      hx-get="/task/{{ task.id }}"
      hx-target="#task-detail"
      hx-swap="innerHTML"
-     class="p-2 border mb-2 cursor-pointer hover:bg-gray-100">
+     class="p-2 border mb-2 cursor-pointer hover:bg-gray-100 flex justify-between items-center">
     <p>{{ task.id }} - {{ task.title }}</p>
+    <input type="checkbox" {% if task.completed %}checked{% endif %} disabled class="ml-2">
 </div>

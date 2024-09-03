@@ -9,10 +9,7 @@
 <form hx-post="/task/update/{{ task.id }}"
       class="mt-4">
     <label class="flex items-center">
-        <input type="checkbox" name="completed"
-               hx-post="/task/update/{{ task.id }}"
-               hx-target="this"
-               hx-swap="outerHTML" {% if task.completed %}checked{% endif %} class="mr-2">
+        {% include 'task_checkbox.html' %}
         Completed
     </label>
 </form>
