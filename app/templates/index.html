@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block tasks %}
+<form hx-post="/task/add" hx-target="#task-list" hx-swap="outerHTML" class="mb-4">
+    <div class="mb-2">
+        <input type="text" name="title" placeholder="Title" class="border p-2 w-full">
+    </div>
+    <div class="mb-2">
+        <input type="text" name="description" placeholder="Description" class="border p-2 w-full">
+    </div>
+    <button type="submit" class="bg-blue-500 text-white py-2 px-4">Add Task</button>
+</form>
+<div id="task-list">
+    {% for task in tasks %}
+    {% include 'task_item.html' %}
+    {% endfor %}
+</div>
+
+{% endblock %}
