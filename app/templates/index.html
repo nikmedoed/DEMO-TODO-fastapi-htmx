@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="w-1/2 p-4 border-r">
-    <form hx-post="/task/add" hx-target="#task-list" hx-swap="outerHTML" class="mb-4">
+    <form hx-post="/task/add" hx-target="#task-list" hx-swap="beforeend" class="mb-4" hx-trigger="submit, htmx:afterRequest: resetForm()">
         <div class="mb-2">
             <input type="text" name="title" placeholder="Title" class="border p-2 w-full">
         </div>
