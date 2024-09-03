@@ -24,7 +24,17 @@ async def add_task(request: Request, title: str = Form(...), description: str = 
         {"request": request, "task": new_task})
                  .body.decode("utf-8"))
 
-    return HTMLResponse(content=task_html)
+    task_detail_html = (templates.TemplateResponse(
+        "task_detail.html",
+        {"request": request, "task": new_task})
+                        .body.decode("utf-8"))
+
+    response_html = f"""
+    <div id="task-list" hx-swap-oob="beforeend">{task_html}</div>
+    <div id="task-detail" hx-swap-oob="innerHTML">{task_detail_html}</div>
+    """
+
+    return HTMLResponse(content=response_html)
 
 
 @router.post("/delete/{task_id}", response_class=HTMLResponse)
