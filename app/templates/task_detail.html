@@ -1,13 +1,19 @@
 <h2 class="text-xl font-bold">ID: {{ task.id }} - {{ task.title }}</h2>
 <p class="mb-4">{{ task.description }}</p>
-<form hx-post="/task/delete/{{ task.id }}" hx-target="#task-{{ task.id }}" hx-swap="outerHTML">
+<form hx-post="/task/delete/{{ task.id }}"
+      hx-target="#task-{{ task.id }}"
+      hx-swap="outerHTML">
     <button type="submit" class="bg-red-500 text-white py-2 px-4">Delete Task</button>
 </form>
 
 
-<form hx-post="/task/update/{{ task.id }}" hx-swap="outerHTML" class="mt-4">
+<form hx-post="/task/update/{{ task.id }}"
+      hx-swap="outerHTML" class="mt-4">
     <label class="flex items-center">
-        <input type="checkbox" name="completed" hx-post="/task/update/{{ task.id }}" hx-target="this" hx-swap="outerHTML" {% if task.completed %}checked{% endif %} class="mr-2">
+        <input type="checkbox" name="completed"
+               hx-post="/task/update/{{ task.id }}"
+               hx-target="this"
+               hx-swap="outerHTML" {% if task.completed %}checked{% endif %} class="mr-2">
         Completed
     </label>
 </form>
