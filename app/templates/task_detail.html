@@ -8,7 +8,8 @@
 </form>
 <form hx-post="/task/update/{{ task.id }}"
       hx-target="#task-checkbox-{{ task.id }}"
-      hx-swap="outerHTML" class="mt-4">
+      hx-swap="outerHTML" class="mt-4"
+>
     <label class="flex items-center">
         <div id="task-checkbox-{{ task.id }}">
             {% include 'task_checkbox.html' %}

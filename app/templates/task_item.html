@@ -3,7 +3,8 @@
      hx-target="#task-detail"
      hx-swap="innerHTML"
      hx-trigger="click delay:100ms"
-     class="p-2 border mb-2 cursor-pointer hover:bg-gray-100 flex justify-between items-center">
+     class="p-2 border mb-2 cursor-pointer hover:bg-gray-100 flex justify-between items-center"
+>
     <p>{{ task.id }} - {{ task.title }}</p>
     <div id="task-checkbox-{{ task.id }}">
         {% include 'task_checkbox.html' %}
