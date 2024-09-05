@@ -58,14 +58,9 @@ async def update_task(task_id: int, request: Request, completed: bool = Form(Fal
         "task_checkbox.html",
         {"request": request, "task": task})
                     .body.decode("utf-8"))
-    task_html = (templates.TemplateResponse(
-        "task_item.html",
-        {"request": request, "task": task})
-                 .body.decode("utf-8"))
 
-    response_html = f"""
-    <div id="task-{task_id}" hx-swap-oob="outerHTML">{task_html}</div>
-    <div id="task-checkbox-{task_id}" hx-swap-oob="outerHTML">{checkbox_html}</div>
+    response_html = f""" 
+    <div id="task-checkbox-{task_id}" hx-trigger="change from:body" hx-swap-oob="outerHTML">{checkbox_html}</div>
     """
 
     return HTMLResponse(content=response_html)

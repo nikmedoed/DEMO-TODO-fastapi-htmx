@@ -1,7 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="w-1/2 p-4 border-r">
+<style>
+    #task-list::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    #task-list::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+    }
+
+    #task-list::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #task-list::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+    }
+</style>
+<div class="w-1/2 p-4 border-r flex flex-col">
     <form id="task-form"
           hx-on::after-request="this.reset()"
           hx-post="/task/add"
@@ -17,7 +35,7 @@
 
         <button type="submit" class="bg-blue-500 text-white py-2 px-4">Add Task</button>
     </form>
-    <div id="task-list">
+    <div id="task-list" class="overflow-y-auto pr-2">
         {% for task in tasks %}
         {% include 'task_item.html' %}
         {% endfor %}
