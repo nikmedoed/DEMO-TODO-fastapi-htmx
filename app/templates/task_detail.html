@@ -3,7 +3,7 @@
 
 <form hx-post="/task/delete/{{ task.id }}"
       hx-target="#task-{{ task.id }}"
-      hx-swap="outerHTML">
+>
     <button type="submit" class="bg-red-500 text-white py-2 px-4">Delete Task</button>
 </form>
 <form hx-post="/task/update/{{ task.id }}"
